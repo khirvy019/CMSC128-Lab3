@@ -1,3 +1,4 @@
+require 'rubygems'
 require 'sinatra'
 require 'yaml/store'
 require 'time'
