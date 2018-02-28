@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title><%= @title %></title>
+		<link href='//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css' rel='stylesheet' />
+		<style>
+			#sender{
+				font-size:24px;
+			}
+			#text-time_sent{
+				font-size:9px;
+			}
+			#single_message{
+				width:500px;
+			}
+			#messages-list{
+				border: 1px solid black;
+				max-width: 520px;
+				margin: auto;
+			}
+			#write-message{
+				width:600px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1 align="center"><%= @title %></h1>
+		<form id="message-form" method="post" action="/add_message">
+		<table id="write-message" align="center">
+		<tr align="center">
+			<td>
+			<textarea id="message" name="message" placeholder="Please type your message" style="resize:none" rows="5"></textarea>
+			</td>
+		</tr>
+		<tr align="center">
+			<td>
+			<input type="text" id="message-name" name="message-name" placeholder="Anonymous">
+			<button type="submit" style="margin-bottom:12px">Ipahayag!</button>
+			</td>
+		</tr>
+		</table>
+		</form>
+		<div id="messages-list" border="1" align="center">
+			<br>
+			<form id="message-search-form" method="post" action="/search">
+				<table id="single_message"><tr><td colspan="2" align="right"><input placeholder="hanapin ang post" name="to_search"><button>Hanapin!</button><br></div></td></tr></table>
+			</form>
+			<% if (@i >0) %>
+				<% for x in 0...@i do%>
+					<%if (x%2==0)%>
+						<table id="single_message">
+						<tr><td><text id="sender"><%= @messages_sender[x]%></text></td><td align="right"><text id="text-time_sent"><%=@messages_sent[x]%></text></td></tr>
+						<tr><td colspan="2"><p><%=@messages_message[x]%></p></td></tr>
+						</table>
+					<% else %>
+						<table id="single_message">
+						<tr><td><text id="text-time_sent"><%=@messages_sent[x]%></text></td><td align="right"><text id="sender"><%= @messages_sender[x]%></text></td></tr>
+						<tr><td colspan="2"><p><%=@messages_message[x]%></p></td></tr>
+						</table>
+					<% end %>
+					<hr width="500px">
+				<% end %>
+			<%else%>
+				<table id="single_message">
+				<tr align="center"><td>Empty</td></tr>
+				</table>
+			<% end %>
+		</div>
+	</body>
+</html>
