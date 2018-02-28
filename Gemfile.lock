@@ -7,6 +7,9 @@ GEM
 PLATFORMS
   x64-mingw32
 
+DEPENDENCIES
+  sinatra
+
 RUBY VERSION
    ruby 2.3.3p222
 
