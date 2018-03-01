@@ -11,6 +11,7 @@ get '/' do
 	@messages_sent = Hash.new()
 	@messages_message = Hash.new()
 	if @buff_messages != nil
+		@buff_messages = @buff_messages.reverse_each
 		@buff_messages.each do |messanger, message|
 			@messages_sender[@i] = messanger[0...(messanger.length-19)]
 			@messages_message[@i] = message
@@ -58,6 +59,7 @@ post '/add_message' do
 	@messages_sent = Hash.new()
 	@messages_message = Hash.new()
 	if @buff_messages != nil
+		@buff_messages = @buff_messages.reverse_each
 		@buff_messages.each do |messanger, message|
 			@messages_sender[@i] = messanger[0...(messanger.length-19)]
 			@messages_message[@i] = message
@@ -92,7 +94,7 @@ post '/search' do
 		@buff_messages = @_messages
 	else
 		@_messages.each do |messanger, message|
-			if to_search == messanger[0...(messanger.length-19)]
+			if (to_search == messanger[0...(messanger.length-19)] || message.include?(to_search))
 				@buff_messages[messanger] = message
 			end
 		end
@@ -102,6 +104,7 @@ post '/search' do
 	@messages_sent = Hash.new()
 	@messages_message = Hash.new()
 	if @buff_messages != nil
+		@buff_messages = @buff_messages.reverse_each
 		@buff_messages.each do |messanger, message|
 			@messages_sender[@i] = messanger[0...(messanger.length-19)]
 			@messages_message[@i] = message
